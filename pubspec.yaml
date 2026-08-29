@@ -1,0 +1,46 @@
+name: adaptive_image_picker
+description: "A production-grade, zero-permission adaptive image picker for Flutter with pure-Dart cropping, binary-search compression, and native PhotoPicker integration."
+version: 1.0.0
+homepage: https://github.com/yourdomain/adaptive_image_picker
+repository: https://github.com/yourdomain/adaptive_image_picker
+issue_tracker: https://github.com/yourdomain/adaptive_image_picker/issues
+topics:
+  - image-picker
+  - image-cropper
+  - image-compression
+  - camera
+  - photopicker
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.19.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  image: ^4.5.2
+  http: ^1.2.0
+  path: ^1.9.0
+  path_provider: ^2.1.2
+  plugin_platform_interface: ^2.1.8
+  web: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.yourdomain.adaptive_image_picker
+        pluginClass: AdaptiveImagePickerPlugin
+      ios:
+        pluginClass: AdaptiveImagePickerPlugin
+      web:
+        pluginClass: AdaptiveImagePickerWeb
+        fileName: adaptive_image_picker_web.dart
+

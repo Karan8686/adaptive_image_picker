@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path name="adaptive_cache" path="." />
+    <external-cache-path name="adaptive_external_cache" path="." />
+    <files-path name="adaptive_files" path="." />
+    <external-files-path name="adaptive_external_files" path="." />
+</paths>
