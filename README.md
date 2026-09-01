@@ -12,6 +12,10 @@
   Built from scratch with native Android 13+ Photo Picker, iOS 14+ <code>PHPicker</code>, pure-Dart interactive gesture cropper with circular avatar masks, binary-search target-size compressor, and adaptive modal sheets.
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Karan8686/adaptive_image_picker/main/doc/demo.gif" alt="Adaptive Image Picker Demo" width="360" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+</p>
+
 ---
 
 ## 📑 Table of Contents

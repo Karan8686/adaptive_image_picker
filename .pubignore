@@ -1,0 +1,14 @@
+# Development & testing
+.dart_tool/
+.github/
+.idea/
+.vscode/
+build/
+coverage/
+test/
+
+# Large media
+*.mov
+*.mp4
+doc/*.mov
+doc/*.mp4
