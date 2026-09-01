@@ -6,6 +6,8 @@ import '../models/compression_options.dart';
 
 /// Pure-Dart image compression and optimization engine with binary-search target-size guarantees.
 class ImageCompressor {
+  const ImageCompressor._();
+
   /// Compresses [bytes] according to the provided [options].
   ///
   /// Runs off the UI thread via [compute] where supported.

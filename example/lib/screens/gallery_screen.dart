@@ -27,9 +27,15 @@ class _GalleryScreenState extends State<GalleryScreen> {
 
   Future<void> _handleSaveToDisk(AdaptiveFile file) async {
     if (kIsWeb) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('On Web: Image bytes are stored in memory.')),
-      );
+      await file.saveToBrowser();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Downloaded to browser: ${file.name}'),
+            backgroundColor: Colors.teal.shade700,
+          ),
+        );
+      }
       return;
     }
     final tempDir = Directory.systemTemp;

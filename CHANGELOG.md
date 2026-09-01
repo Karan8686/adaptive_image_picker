@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.2
+
+* **Feature**: Added full native Desktop support for **Windows**, **macOS**, and **Linux** using Flutter's `dartPluginClass` and `file_selector`.
+* **Improvement**: Streamlined multi-platform file picking and camera fallbacks across desktop platforms.
+
+## 1.0.1
+
+* **Fix**: Bumped `image` dependency constraint to `^4.9.2` to resolve `encodeWebP` compilation errors during lower bounds downgrade analysis.
+* **Fix**: Replaced direct `dart:io` imports with conditional imports and `defaultTargetPlatform` to ensure full Web and WASM runtime compatibility.
+* **Docs**: Added docstrings and private constructors for utility classes to achieve 100% public API documentation coverage.
+* **Docs**: Corrected repository and issue tracker URLs in `pubspec.yaml`.
+
 ## 1.0.0
 
 * Initial release of `adaptive_image_picker`.

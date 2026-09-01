@@ -26,6 +26,8 @@ export 'adaptive_image_picker_method_channel.dart';
 /// Provides zero-permission native picking, pure-Dart cropping,
 /// binary search compression, and adaptive UI components.
 class AdaptiveImagePicker {
+  const AdaptiveImagePicker._();
+
   /// Returns the platform version (for diagnostics/testing).
   static Future<String?> getPlatformVersion() {
     return AdaptiveImagePickerPlatform.instance.getPlatformVersion();

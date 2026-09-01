@@ -121,9 +121,15 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
   Future<void> _saveResultToDisk() async {
     if (_processedFile == null) return;
     if (kIsWeb) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('On Web: Image bytes are kept in memory.')),
-      );
+      await _processedFile!.saveToBrowser();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Downloaded to browser: ${_processedFile!.name}'),
+            backgroundColor: Colors.teal.shade700,
+          ),
+        );
+      }
       return;
     }
     final tempDir = Directory.systemTemp;

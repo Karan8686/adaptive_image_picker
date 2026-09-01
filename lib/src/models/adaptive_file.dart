@@ -1,6 +1,6 @@
-import 'dart:io' as io;
 import 'dart:math';
 import 'package:flutter/foundation.dart';
+import '../utils/file_io_helper.dart' as io_helper;
 
 /// Represents a cross-platform media file with rich metadata,
 /// lazy byte loading, format conversion, and disk/memory helpers.
@@ -139,10 +139,7 @@ class AdaptiveFile {
       return bytes!;
     }
     if (!kIsWeb && path != null && path!.isNotEmpty) {
-      final file = io.File(path!);
-      if (await file.exists()) {
-        return await file.readAsBytes();
-      }
+      return await io_helper.readFileBytes(path!);
     }
     throw StateError('Cannot read bytes for AdaptiveFile: no in-memory bytes and path is unavailable or does not exist ($path).');
   }
@@ -153,10 +150,7 @@ class AdaptiveFile {
       return bytes!;
     }
     if (!kIsWeb && path != null && path!.isNotEmpty) {
-      final file = io.File(path!);
-      if (file.existsSync()) {
-        return file.readAsBytesSync();
-      }
+      return io_helper.readFileBytesSync(path!);
     }
     return null;
   }
@@ -168,15 +162,24 @@ class AdaptiveFile {
       throw UnsupportedError('saveTo() filesystem is not supported on web platform.');
     }
     final rawBytes = await readAsBytes();
-    final file = io.File(destinationPath);
-    await file.parent.create(recursive: true);
-    await file.writeAsBytes(rawBytes);
+    await io_helper.saveFileBytes(destinationPath, rawBytes);
 
     return copyWith(
       path: destinationPath,
       name: _extractFileName(destinationPath),
       size: rawBytes.lengthInBytes,
     );
+  }
+
+  /// Triggers a browser file download saving the file to the user's local Downloads folder on Web.
+  ///
+  /// Throws [UnsupportedError] if called on non-web platforms.
+  Future<void> saveToBrowser() async {
+    if (!kIsWeb) {
+      throw UnsupportedError('saveToBrowser() is only supported on web platforms.');
+    }
+    final rawBytes = await readAsBytes();
+    await io_helper.downloadFileToBrowser(rawBytes, name, mimeType: mimeType);
   }
 
   /// Saves the file into a directory folder using its current [name].
@@ -192,11 +195,7 @@ class AdaptiveFile {
   /// Deletes the file if it exists on disk.
   Future<bool> delete() async {
     if (!kIsWeb && path != null && path!.isNotEmpty) {
-      final file = io.File(path!);
-      if (await file.exists()) {
-        await file.delete();
-        return true;
-      }
+      return await io_helper.deleteFilePath(path!);
     }
     return false;
   }

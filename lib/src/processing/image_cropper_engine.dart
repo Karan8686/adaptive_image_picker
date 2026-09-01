@@ -8,6 +8,8 @@ import '../models/compression_options.dart';
 
 /// Pure-Dart image cropping, rotation, flipping, and circular masking engine.
 class ImageCropperEngine {
+  const ImageCropperEngine._();
+
   /// Crops, rotates, flips, and masks an image represented as raw bytes.
   ///
   /// [bytes] is the raw image file data (JPEG, PNG, WebP, etc.).

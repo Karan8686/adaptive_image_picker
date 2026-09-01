@@ -112,9 +112,15 @@ class MediaDetailSheet extends StatelessWidget {
 
   Future<void> _handleSaveToDisk(BuildContext context) async {
     if (kIsWeb) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('File is stored in Web browser memory.')),
-      );
+      await file.saveToBrowser();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Downloaded to browser: ${file.name}'),
+            backgroundColor: Colors.teal.shade700,
+          ),
+        );
+      }
       return;
     }
     final tempDir = Directory.systemTemp;

@@ -1,4 +1,3 @@
-import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,8 @@ import '../models/picker_options.dart';
 
 /// Adaptive modal bottom sheet and action dialog for selecting media sources.
 class MediaBottomSheet {
+  const MediaBottomSheet._();
+
   /// Displays an adaptive picker sheet (Cupertino on iOS, Material 3 on Android, dialog on Web/Desktop).
   static Future<ImageSource?> show(
     BuildContext context, {
@@ -26,11 +27,15 @@ class MediaBottomSheet {
       );
     }
 
-    final isApple = !kIsWeb && (Platform.isIOS || Platform.isMacOS);
+    final isApple = !kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.macOS);
 
     if (isApple) {
       return _showCupertinoActionSheet(context, options);
-    } else if (kIsWeb || (!kIsWeb && (Platform.isWindows || Platform.isLinux))) {
+    } else if (kIsWeb ||
+        defaultTargetPlatform == TargetPlatform.windows ||
+        defaultTargetPlatform == TargetPlatform.linux) {
       return _showDesktopWebDialog(context, options);
     } else {
       return _showMaterialBottomSheet(context, options);
